@@ -6,7 +6,7 @@ from torch import nn, optim
 import torchvision as tv
 import numpy as np
 import utils
-import model_otm
+import model_ddcn
 
 def check_mem(cuda_device):
     devices_info = os.popen('"/usr/bin/nvidia-smi" --query-gpu=memory.total,memory.used --format=csv,nounits,noheader').read().strip().split("\n")
@@ -152,10 +152,8 @@ if __name__ == "__main__":
                                       utils.ToTorchTensor()
                                   ]))
 
-    print('sss1')
     training_loader = torch.utils.data.DataLoader(
         training_set, batch_size=args.batch_size, num_workers=1, shuffle=True)
-    print('sss2')
 
     val_set = utils.ImageDir(args.val_dir, args.val_cdir, preload=False,
                              transform=tv.transforms.Compose([
@@ -170,7 +168,7 @@ if __name__ == "__main__":
 
     epoch_mul=5
     
-    jnet = nn.DataParallel(model_otm.One_to_many()).cuda()
+    jnet = nn.DataParallel(model_ddcn.DDCN(1)).cuda()
 
     if args.qf > 22:
         jnet.load_state_dict(torch.load('/mnt/ssd/yangwh/compression-artifacts-becnmark/models/DDCN/QP' + str(args.qf-5) + '/ckpt/' + str(epoch_mul*args.epoch_num)))
