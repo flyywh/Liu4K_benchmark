@@ -37,9 +37,10 @@ The images in the dataset are under the license CC BY-NC-ND 4.0.
 Thanks to Yueyu Hu and Datong Wei for providing part of the images in the dataset (see list.txt).
 
 ## Testing Example
+You can refer to ./DnCNN_HM/test/test.sh for testing command usage.
 
 ## Training Example
-
+You can refer to ./DnCNN_HM/train_DnCNN_HM_QP22.sh for training command usage.
 
 ## Contact
 
